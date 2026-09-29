@@ -161,34 +161,34 @@ describe("copyToClipboard", () => {
 describe("parseCSV", () => {
   it("parses simple CSV", () => {
     const csv = "a,b,c\\n1,2,3";
-    expect(parseCSV(csv.replace(/\\\\n/g, "\\n"))).toEqual([["a","b","c"],["1","2","3"]]);
+    expect(parseCSV(csv.replace(/\\n/g, "\n"))).toEqual([["a","b","c"],["1","2","3"]]);
   });
   
   it("parses CSV with \\r\\n", () => {
     const csv = "a,b\\r\\n1,2";
-    expect(parseCSV(csv.replace(/\\\\r\\\\n/g, "\\r\\n"))).toEqual([["a","b"],["1","2"]]);
+    expect(parseCSV(csv.replace(/\\r\\n/g, "\r\n"))).toEqual([["a","b"],["1","2"]]);
   });
   
   it("parses CSV with \\r", () => {
     const csv = "a,b\\r1,2";
-    expect(parseCSV(csv.replace(/\\\\r/g, "\\r"))).toEqual([["a","b"],["1","2"]]);
+    expect(parseCSV(csv.replace(/\\r/g, "\r"))).toEqual([["a","b"],["1","2"]]);
   });
 
   it("parses CSV with quotes", () => {
     const csv = 'a,"b,c",d\\n1,2,3';
-    expect(parseCSV(csv.replace(/\\\\n/g, "\\n"))).toEqual([["a","b,c","d"],["1","2","3"]]);
+    expect(parseCSV(csv.replace(/\\n/g, "\n"))).toEqual([["a","b,c","d"],["1","2","3"]]);
   });
 
   it("parses CSV with escaped quotes", () => {
-    const csv = 'a,"b\\"\\"c",d';
-    expect(parseCSV(csv)).toEqual([["a",'b""c',"d"]]);
+    const csv = 'a,"b""c",d';
+    expect(parseCSV(csv)).toEqual([["a",'b"c',"d"]]);
   });
 });
 
 describe("parseAddressBookCSV", () => {
   it("parses without header", () => {
     const csv = "Alice,GABC123\\nBob,GDEF456";
-    expect(parseAddressBookCSV(csv.replace(/\\\\n/g, "\\n"))).toEqual([
+    expect(parseAddressBookCSV(csv.replace(/\\n/g, "\n"))).toEqual([
       { name: "Alice", address: "GABC123", rowNumber: 1 },
       { name: "Bob", address: "GDEF456", rowNumber: 2 },
     ]);
@@ -196,7 +196,7 @@ describe("parseAddressBookCSV", () => {
 
   it("ignores header row", () => {
     const csv = "Name,Address\\nAlice,GABC123";
-    expect(parseAddressBookCSV(csv.replace(/\\\\n/g, "\\n"))).toEqual([
+    expect(parseAddressBookCSV(csv.replace(/\\n/g, "\n"))).toEqual([
       { name: "Alice", address: "GABC123", rowNumber: 2 },
     ]);
   });
