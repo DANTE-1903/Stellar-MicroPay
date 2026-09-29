@@ -118,7 +118,7 @@ describe("timeAgo", () => {
 
 describe("formatStroopsToXLM", () => {
   it("converts bigint stroops to XLM", () => {
-    expect(formatStroopsToXLM(10000000n)).toBe("1.0000000 XLM");
+    expect(formatStroopsToXLM(BigInt("10000000"))).toBe("1.0000000 XLM");
     expect(formatStroopsToXLM("10000000")).toBe("1.0000000 XLM");
     expect(formatStroopsToXLM(5000000)).toBe("0.5000000 XLM");
   });
